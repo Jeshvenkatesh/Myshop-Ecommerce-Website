@@ -1,0 +1,10 @@
+.ImgWrapper{
+    width:60%;
+}
+.mainWrapper{
+    width:30rem;
+    height:fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:100px;
+}
