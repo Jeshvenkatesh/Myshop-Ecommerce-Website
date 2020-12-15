@@ -114,7 +114,8 @@ const Topbar = (props) => {
                         <Box className={classes.IconsWrapper}>
                         <Tabs>
                                 <Tab onClick={()=>{handelRedirect()}} className={classes.tab} icon={<ShoppingCartIcon />}  />
-                                <Tab className={classes.tab} icon={<AccountCircleIcon />} />
+                                <Tab onClick={()=>{props.handleOpen()}} label="Login" className={classes.tab} />
+                                {/* icon={<AccountCircleIcon />} */}
                             </Tabs>
                         </Box>
                     </Toolbar>
