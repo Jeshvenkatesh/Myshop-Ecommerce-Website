@@ -33,14 +33,17 @@ const useStyles = makeStyles((theme) => ({
 const Cartpage = (props) => {
 
     const [cartData, setCartdata] = useState([]);
+    
     const classes = useStyles();
     const notify = () => toast("Please select products to place order!");
-    useEffect(() => {
 
-        const url = "https://5fb918062f145f0016c3caba.mockapi.io/cartdata"
+    //  getting data....
+    useEffect(() => {
+        // const url = "https://5fb918062f145f0016c3caba.mockapi.io/cartdata"
+        const url ="http://localhost:4000/posts";
         Axios.get(url)
             .then((response) => {
-                // console.log(response.data);
+                console.log(response.data);
                 setCartdata([...response.data])
             })
             .catch((err) => {
@@ -59,7 +62,8 @@ const Cartpage = (props) => {
     }
 
     const getCartData = () => {
-        const url = "https://5fb918062f145f0016c3caba.mockapi.io/cartdata"
+        // const url = "https://5fb918062f145f0016c3caba.mockapi.io/cartdata"
+        const url = "http://localhost:4000/posts";
         Axios.get(url)
             .then((response) => {
                 // console.log(response.data);
@@ -88,7 +92,9 @@ const Cartpage = (props) => {
 
     const handleDeleteCartItem = (id) => {
 
-        const url = "https://5fb918062f145f0016c3caba.mockapi.io/cartdata/" + id
+        // const url = "https://5fb918062f145f0016c3caba.mockapi.io/cartdata/" + id
+        console.log(id);
+        const url = "http://localhost:4000/posts/" + id
         Axios.delete(url)
             .then((response) => {
                 // console.log(response)
@@ -98,6 +104,7 @@ const Cartpage = (props) => {
                 console.log(err)
             })
     }
+     
     const generateCartItems = cartData.map((item) => {
         return (
             <Box>
@@ -106,16 +113,16 @@ const Cartpage = (props) => {
                     <CardActionArea className={classes.cardActionareWidth} >
                         <CardMedia
                             component="img"
-                            image={item.contitem.preview}
-                            title={item.contitem.brand}
+                            image={item.preview}
+                            title={item.brand}
                             className={classes.imgWrapper}
                         />
                     </CardActionArea>
                     <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="body1" component="p">
-                            {item.contitem.name}
+                            {item.name}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p"> Price : ${item.contitem.price}</Typography>
+                        <Typography variant="body2" color="textSecondary" component="p"> Price : ${item.price}</Typography>
                     </CardContent>
                     <Box>
                         <Button
@@ -124,7 +131,7 @@ const Cartpage = (props) => {
                             size="small"
                             className={classes.button}
                             endIcon={<CancelIcon />}
-                            onClick={() => { handleDeleteCartItem(item.id) }}
+                            onClick={() => { handleDeleteCartItem(item._id) }}
                         > </Button>
                     </Box>
                 </Card>
@@ -133,7 +140,7 @@ const Cartpage = (props) => {
     })
 
     const generateTotalCartAmount = cartData.reduce((acc, item) => {
-        acc = acc + item.contitem.price;
+        acc = acc + item.price;
         return acc
     }, 0)
 

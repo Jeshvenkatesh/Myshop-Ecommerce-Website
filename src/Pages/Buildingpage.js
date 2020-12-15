@@ -39,7 +39,9 @@ const Buildingpage = (props) => {
     const [address, setAddress] = useState({})
     const [message, setMessage] = useState(false)
 
-    const handleModal = (arg) => {
+    //  havle modal once next button click
+
+    const handleModal = (arg) => {     
         setModal(arg)
         const totalAmount = localStorage.getItem('TotalAmount')
         const address = JSON.parse(localStorage.getItem('shippingaddress'))

@@ -64,7 +64,7 @@ const Creditcard = () => {
               />
               <TextField 
                 variant="outlined"
-                type="tel"
+                type="text"
                 name="name"
                 placeholder="Card Holder Name"
                 value={name}

@@ -38,6 +38,7 @@ const CardSection = () => {
     const [cardData, setCardData] = useState([]);
 
     const notify = (procuct) => toast(procuct + " has been added sucessfully");
+    
 
     useEffect(() => {
         Axios.get("https://5fb918062f145f0016c3caba.mockapi.io/data")
@@ -58,12 +59,15 @@ const CardSection = () => {
 
         const procuct = item.name;
         const data = {
-            contitem: { ...item },
-            itemId: item.id,
-            quantity: 1
+            brand: item.brand,
+            description: item.description,
+            name: item.name,
+            preview: item.preview,
+            price:item.price
         }
         console.log(data);
-        const url = "https://5fb918062f145f0016c3caba.mockapi.io/cartdata"
+        // const url = "https://5fb918062f145f0016c3caba.mockapi.io/cartdata" 
+        const url ="http://localhost:4000/posts";
         Axios.post(url, data)
             .then((response) => {
                 console.log(response);
@@ -80,7 +84,7 @@ const CardSection = () => {
             <Box key={item.id} >
                 <Card className={classes.cardWrapper}  >
                     <CardActionArea>
-                        <Link to={`/details/${item.id}`}>
+                        <Link to={`/details/${item.id}`}>    
                         <CardMedia
                             component="img"
                             image={item.preview}
